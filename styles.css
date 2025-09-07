@@ -1,0 +1,657 @@
+/* Global scrollbar hiding for all browsers */
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, newer Edge) */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    font-family: Arial, sans-serif;
+    color: white;
+    height: 100vh;
+    /* Removed overflow: hidden to allow page scrolling */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+.home-button {
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.home-button img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+
+.home-button:hover {
+    background-color: #555;
+}
+
+.nav-buttons button {
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #555;
+}
+
+.container {
+    display: flex;
+    max-width: 1600px;
+    height: calc(100vh - 52px);
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.container > div,
+.content > div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.container > div:hover,
+.content > div:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 15px rgba(244, 244, 245, 0.4); /* indigo glow */
+  border-radius: 0.75rem; /* rounded-xl */
+}
+
+/* Fixed profile photo on left, vertically centered */
+.profile-photo {
+    flex: 1;
+    display: flex;
+    justify-content:center; /* align left */
+    align-items: center; /* vertical center */
+    padding-right: 20px;
+}
+
+/* Large circular image */
+.profile-photo img {
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+}
+
+/* Scrollable content on the right */
+.content {
+    flex: 2;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-left: 30px;
+}
+
+/* Section boxes */
+.description, .education, .timeline {
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.description h1,
+.education h2,
+.timeline h2 {
+    margin-top: 0;
+}
+
+.timeline ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.timeline ul li {
+    padding: 8px 0;
+    border-left: 3px solid white;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Projects page container and layout */
+.projects-container {
+    padding: 60px 30px;
+    max-width: 1100px;
+    margin: auto auto;
+    color: white;
+}
+
+.projects-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Grid layout for projects with spacious gaps */
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 90px; /* vertical 40px, horizontal 30px */
+    width: 110%;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+/* Individual project card styling with border and spacing */
+.project-card {
+    background-color: #111;
+    border-radius: 10px;
+    border: 2px solid  #555;
+    cursor: pointer;
+    box-shadow: none;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 25px;
+    width: 100%;
+    margin: 10px; /* margin for spacing around card */
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.project-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: white;
+}
+
+/* Services container styling */
+        body {
+            background: #101010;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #fff;
+        }
+
+        .services-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .services-container h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .service-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .service-card {
+            display: flex;
+            align-items: stretch;
+            text-decoration: none;
+            background: #181818;
+            border-radius: 12px;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+            overflow: hidden;
+            transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .service-card:hover, .service-card:focus {
+            background: #555;
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 4px 32px rgba(80, 80, 255, 0.2);
+            border-color: #fff;
+            outline: none;
+        }
+
+        .service-name {
+            flex: 0 0 180px;
+            background: #222;
+            color: #ffffff;
+            padding: 32px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 1.20rem;
+            font-weight: 700;
+            border-right: 1px solid #eee;
+            transition: background 0.3s, color 0.3s;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+
+        .service-card:hover .service-name,
+        .service-card:focus .service-name {
+            background: #555;
+            color: #ffffff;
+        }
+
+        .service-description {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 32px 28px;
+            font-size: 1.04rem;
+            color: #f2f2f2;
+            line-height: 1.6;
+            transition: color 0.3s;
+            text-align: left;
+        }
+
+        .service-card:hover .service-description,
+        .service-card:focus .service-description {
+            color: #fff;
+        }
+
+        .book-slot-container {
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .book-slot-button {
+            background-color: #222;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            width: 100%;
+            max-width: 100%;
+            display: block;
+        }
+
+        .book-slot-button:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 700px) {
+            .service-card {
+                flex-direction: column;
+            }
+            .service-name {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                justify-content: center;
+                padding: 20px 10px;
+                font-size: 1.12rem;
+            }
+            .service-description {
+                padding: 20px 16px;
+                font-size: 0.97rem;
+            }
+        }
+/* Blog container and cards */
+.blog-container {
+    padding: 60px 30px;
+    max-width: 1100px;
+    margin: auto auto;
+    color:  white;
+}
+
+.blog-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.blog-cards {
+   display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 90px; /* vertical 40px, horizontal 30px */
+    width: 110%;
+    max-width: 1000px;
+    margin: auto auto;
+    justify-content: space-between;
+}
+
+.blog-card {
+    background-color: #111;
+    border-radius: 10px;
+    border: 2px solid #444;
+    cursor: pointer;
+    box-shadow: none;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 25px;
+    width: 100%;
+    margin: 10px; /* margin for spacing around card */
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.blog-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: white;
+}
+
+/* Contact page containers */
+.contact-wrapper {
+    display: flex;
+    max-width: 1000px;
+    margin: 80px auto 60px auto;
+    gap: 40px;
+    padding: 0 30px;
+    color: white;
+}
+
+/* Cards equal size */
+.contact-card {
+    background-color: #111;
+    border-radius: 12px;
+    flex: 1;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Circular profile image in contact info card */
+.contact-profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 25px auto;
+    border: 3px solid white;
+}
+
+/* Contact Info styles */
+.contact-info h2 {
+    margin-top: 0;
+    margin-bottom:50x;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    margin: 12px 0;
+}
+
+.contact-info a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: white;
+}
+
+/* Contact form styles */
+.contact-form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background-color: #222;
+    border: 1.5px solid #555;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 25px;
+    color: white;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    width: 95%;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #888;
+}
+
+.contact-form button {
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.contact-form button:hover {
+    background-color: #555;
+}
+
+/* Popup modal styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s;
+}
+
+.popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.popup {
+    background-color: #222;
+    padding: 40px 50px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+.popup h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.popup button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    background-color: #555;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #888;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-wrapper {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 30px;
+    }
+}
+/* Social Media Links Styling */
+.social-links-container {
+    display: flex;
+    gap: 5px;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin: 20px 0 0 0;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #222;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 90px;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.social-text {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* LinkedIn Styling */
+.social-link.linkedin {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.social-link.linkedin:hover {
+    background: linear-gradient(135deg, #0077b5 0%, #005885 50%, #004471 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+}
+
+/* GitHub Styling */
+.social-link.github {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.social-link.github:hover {
+    background: linear-gradient(135deg, #333 0%, #24292e 50%, #1a1e22 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Instagram Styling */
+.social-link.instagram {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.social-link.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    border-color: transparent;
+}
+
+/* Responsive Design for Contact Card */
+@media (max-width: 600px) {
+    .social-links-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .social-link {
+        width: 100%;
+        max-width: 150px;
+    }
+}

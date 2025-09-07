@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs</title>
+    <link rel="icon" href="pic.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <button class="home-button" onclick="location.href='index.html'">
+            <img src="pic.png" alt="Profile Photo" />
+            <span>Venkata Sudheer Paruchuri</span>
+        </button>
+        <div class="nav-buttons">
+            <button onclick="location.href='projects.html'">Projects</button>
+            <button onclick="location.href='services.html'">Services</button>
+            <button onclick="location.href='blogs.html'">Blogs</button>
+            <button onclick="location.href='contact.html'">Contact</button>
+        </div>
+    </nav>
+
+    <main class="blog-container">
+        <h1>My Blogs</h1>
+        <div class="blog-cards">
+            <div class="blog-card" onclick="location.href='blog1.html'">
+                <img src="blog1.jpg" alt="Blog 1" />
+                <h3>Understanding Modern Web Development</h3>
+            </div>
+            <div class="blog-card" onclick="location.href='blog2.html'">
+                <img src="blog2.jpg" alt="Blog 2" />
+                <h3>Tips for Effective Remote Work</h3>
+            </div>
+            <div class="blog-card" onclick="location.href='blog3.html'">
+                <img src="blog3.jpg" alt="Blog 3" />
+                <h3>Introduction to Machine Learning</h3>
+            </div>
+            <!-- Add more blog cards as needed -->
+        </div>
+    </main>
+</body>
+</html>
