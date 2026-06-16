@@ -198,7 +198,7 @@ async function loadProjects() {
             card.innerHTML = `
 
                 <img
-                    src="https://opengraph.githubassets.com/1/${username}/${repoName}"
+                    src="https://opengraph.githubassets.com/1/${username}/${repo.name}"
                     alt="${repo.name}"
                     loading="lazy"
                     onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';"
@@ -244,6 +244,8 @@ async function loadProjects() {
 loadProjects();
 
 </script>
+
+
 
 
 </body>
