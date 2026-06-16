@@ -105,77 +105,96 @@
 
 <script>
 
-const featuredRepos = [
+const username = "VenkataSudheer1863";
+
+const projects = [
 
 {
-    name: "Context Engineering Framework",
+    repo: "Agentbench-Gov",
+    title: "Agentbench-Gov",
+    description:
+        "A benchmark and evaluation framework for assessing governance-aware behavior in autonomous AI agents.",
+    image:
+        "https://opengraph.githubassets.com/1/"
+},
+
+{
     repo: "Context-Engineering-Framework",
-    description: "Advanced context engineering framework for enterprise AI systems.",
+    title: "Context Engineering Framework",
+    description:
+        "Advanced context engineering toolkit for LLM and agentic AI systems.",
     language: "Python",
-    stars: "⭐",
+    image:
+        "https://opengraph.githubassets.com/1/VenkataSudheer1863/Context-Engineering-Framework"
 },
 
 {
-    name: "AI Governance Platform",
-    repo: "AI-Governance-Platform",
-    description: "AI governance, compliance and risk management platform.",
-    language: "Python",
-    stars: "⭐",
-},
-
-{
-    name: "Industry AI Suite",
     repo: "Industry-AI-Suite",
-    description: "Collection of industry specific AI solutions.",
+    title: "Industry AI Suite",
+    description:
+        "Collection of domain-specific AI solutions for real-world industries.",
     language: "Python",
-    stars: "⭐",
+    image:
+        "https://opengraph.githubassets.com/1/VenkataSudheer1863/Industry-AI-Suite"
 }
 
 ];
 
-const username = "VenkataSudheer1863";
-
 const container =
 document.getElementById("project-cards");
 
-container.innerHTML = "";
+function renderProjects() {
 
-featuredRepos.forEach(project => {
+    container.innerHTML = "";
 
-    const card = document.createElement("div");
+    projects.forEach(project => {
 
-    card.className = "project-card";
+        const card =
+            document.createElement("div");
 
-    card.innerHTML = `
+        card.className =
+            "project-card";
 
-        <img
-            src="https://opengraph.githubassets.com/1/${username}/${project.repo}"
-            alt="${project.name}"
-            onerror="this.src='pic.png'"
-        >
+        card.innerHTML = `
 
-        <h3>${project.name}</h3>
+            <img
+                src="${project.image}"
+                alt="${project.title}"
+                loading="lazy"
+                onerror="
+                    this.onerror=null;
+                    this.src='pic.png';
+                "
+            >
 
-        <p>${project.description}</p>
+            <h3>${project.title}</h3>
 
-        <div class="project-meta">
-            ${project.language}
-        </div>
+            <p>${project.description}</p>
 
-    `;
+            <div class="project-meta">
+                ${project.language}
+            </div>
 
-    card.onclick = () => {
+        `;
 
-        window.open(
-            `https://github.com/${username}/${project.repo}`,
-            "_blank"
-        );
+        card.onclick = () => {
 
-    };
+            window.open(
+                `https://github.com/${username}/${project.repo}`,
+                "_blank"
+            );
 
-    container.appendChild(card);
+        };
 
-});
+        container.appendChild(card);
+
+    });
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    renderProjects
+);
 
 </script>
 
