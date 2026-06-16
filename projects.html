@@ -102,181 +102,80 @@
     </div>
 
 </main>
+
 <script>
 
-const username = "VenkataSudheer1863";
-const projectContainer = document.getElementById("project-cards");
+const featuredRepos = [
 
-/*
-    Featured repository names.
-    Add/remove repos here.
-*/
-const FEATURED_REPOS = [
+{
+    name: "Context Engineering Framework",
+    repo: "Context-Engineering-Framework",
+    description: "Advanced context engineering framework for enterprise AI systems.",
+    language: "Python",
+    stars: "⭐",
+},
 
-    "repo-name-1",
-    "repo-name-2",
-    "repo-name-3",
-    "repo-name-4"
+{
+    name: "AI Governance Platform",
+    repo: "AI-Governance-Platform",
+    description: "AI governance, compliance and risk management platform.",
+    language: "Python",
+    stars: "⭐",
+},
+
+{
+    name: "Industry AI Suite",
+    repo: "Industry-AI-Suite",
+    description: "Collection of industry specific AI solutions.",
+    language: "Python",
+    stars: "⭐",
+}
 
 ];
 
-async function fetchAllRepos() {
+const username = "VenkataSudheer1863";
 
-    let page = 1;
-    let allRepos = [];
+const container =
+document.getElementById("project-cards");
 
-    while (true) {
+container.innerHTML = "";
 
-        const response = await fetch(
-            `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=updated`
-        );
-
-        if (!response.ok) {
-            throw new Error("GitHub API Error");
-        }
-
-        const repos = await response.json();
-
-        if (!Array.isArray(repos) || repos.length === 0) {
-            break;
-        }
-
-        allRepos.push(...repos);
-        page++;
-    }
-
-    return allRepos;
-}
-
-function createProjectCard(repo) {
+featuredRepos.forEach(project => {
 
     const card = document.createElement("div");
 
     card.className = "project-card";
 
-    const imageUrl =
-        repo.homepage && (
-            repo.homepage.endsWith(".png") ||
-            repo.homepage.endsWith(".jpg") ||
-            repo.homepage.endsWith(".jpeg") ||
-            repo.homepage.endsWith(".webp")
-        )
-            ? repo.homepage
-            : `https://opengraph.githubassets.com/1/${username}/${repo.name}`;
-
     card.innerHTML = `
 
         <img
-            src="${imageUrl}"
-            alt="${repo.name}"
-            loading="lazy"
-            onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';"
+            src="https://opengraph.githubassets.com/1/${username}/${project.repo}"
+            alt="${project.name}"
+            onerror="this.src='pic.png'"
         >
 
-        <h3>
-            ${repo.name.replace(/[-_]/g, " ")}
-        </h3>
+        <h3>${project.name}</h3>
 
-        <p>
-            ${repo.description || "No description available"}
-        </p>
+        <p>${project.description}</p>
 
         <div class="project-meta">
-            ⭐ ${repo.stargazers_count}
-            |
-            🍴 ${repo.forks_count}
-            |
-            ${repo.language || "N/A"}
+            ${project.language}
         </div>
 
     `;
 
-    card.addEventListener("click", () => {
-        window.open(repo.html_url, "_blank");
-    });
+    card.onclick = () => {
 
-    return card;
-}
+        window.open(
+            `https://github.com/${username}/${project.repo}`,
+            "_blank"
+        );
 
-async function loadProjects() {
+    };
 
-    try {
+    container.appendChild(card);
 
-        projectContainer.innerHTML = `
-            <div class="loading">
-                Loading Featured Projects...
-            </div>
-        `;
-
-        const repos = await fetchAllRepos();
-
-        let featuredRepos = [];
-
-        /*
-            Method 1:
-            Match repo names from FEATURED_REPOS list
-        */
-
-        if (FEATURED_REPOS.length > 0) {
-
-            featuredRepos = repos.filter(repo =>
-                FEATURED_REPOS.includes(repo.name)
-            );
-        }
-
-        /*
-            Method 2:
-            If no featured repos specified,
-            automatically show latest non-fork repos.
-        */
-
-        if (featuredRepos.length === 0) {
-
-            featuredRepos = repos
-                .filter(repo => !repo.fork)
-                .sort(
-                    (a, b) =>
-                        new Date(b.updated_at) -
-                        new Date(a.updated_at)
-                )
-                .slice(0, 12);
-        }
-
-        projectContainer.innerHTML = "";
-
-        if (featuredRepos.length === 0) {
-
-            projectContainer.innerHTML = `
-                <div class="loading">
-                    No Projects Found
-                </div>
-            `;
-
-            return;
-        }
-
-        featuredRepos.forEach(repo => {
-            projectContainer.appendChild(
-                createProjectCard(repo)
-            );
-        });
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        projectContainer.innerHTML = `
-            <div class="loading">
-                Unable to load GitHub projects.
-                <br><br>
-                Please try again later.
-            </div>
-        `;
-    }
-}
-
-loadProjects();
+});
 
 </script>
 
