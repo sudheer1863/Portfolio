@@ -4,17 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projects</title>
+
     <link rel="icon" href="pic.png" type="image/png" />
     <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 30px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .project-meta {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .project-card {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 </head>
+
 <body>
+
     <nav class="navbar">
         <button class="home-button" onclick="location.href='index.html'">
             <img src="pic.png" alt="Profile Photo" />
             <span>Venkata Sudheer Paruchuri</span>
         </button>
+
         <div class="nav-buttons">
-            <a href="Sudheer_Resume.pdf" target="_blank" download
+            <a href="Sudheer_Resume.pdf"
+               target="_blank"
+               download
                style="
                     margin-left: 8px;
                     background-color: #222;
@@ -30,7 +73,10 @@
                 "
                 onmouseover="this.style.backgroundColor='#555';"
                 onmouseout="this.style.backgroundColor='#222';"
-            >Resume</a>
+            >
+                Resume
+            </a>
+
             <button onclick="location.href='projects.html'">Projects</button>
             <button onclick="location.href='services.html'">Services</button>
             <button onclick="location.href='blogs.html'">Blogs</button>
@@ -39,46 +85,154 @@
     </nav>
 
     <main class="projects-container">
-        <h1>My Projects</h1>
-        <div class="project-cards">
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Generative_AI_Projects'">
-                <img src="https://thfvnext.bing.com/th/id/OIP.OHaeBScDeKHFbqtD6JYtTgHaEM?w=271&h=180&c=7&r=0&o=5&cb=thfvnext&dpr=1.5&pid=1.7" alt="Project 1" />
-                <h3>Gen AI Projects </h3>
+        <h1>My GitHub Projects</h1>
+
+        <div id="project-cards" class="project-cards">
+            <div class="loading">
+                Loading GitHub Repositories...
             </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Web_Dev_Projects'">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.wGsEXlTWod3qzPMGQI9JqQAAAA?cb=thfvnext&pid=ImgDet&w=178&h=211&c=7&dpr=1.5&o=7&rm=3" alt="Project 2" />
-                <h3>Full‑Stack Projects</h3>
-            </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Data_Science_Projects'">
-                <img src="https://i.ytimg.com/vi/yh2pLdDb87c/maxresdefault.jpg" alt="Project 3" />
-                <h3>Data Science Projects</h3>
-            </div>
-             <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Machine_Learning_Projects'">
-                <img src="https://thfvnext.bing.com/th/id/OIP.AdHBr9rWfNDKsWwd446LZwHaEK?w=251&h=180&c=7&r=0&o=7&cb=thfvnext&dpr=1.5&pid=1.7&rm=3" alt="Project 1" />
-                <h3>Machine Learning Projects</h3>
-            </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Deep_Learning_Projects'">
-                <img src="https://thfvnext.bing.com/th/id/OIP.GhM6cbL_nuUNRbYvoH_OawHaE8?w=228&h=180&c=7&r=0&o=5&cb=thfvnext&dpr=1.5&pid=1.7" alt="Project 2" />
-                <h3>Deep Learning Projects</h3>
-            </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/NLP_Projects'">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.7EqVHOXPsuSXoKA8TvZ37gAAAA?cb=thfvnext&w=474&h=248&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Project 3" />
-                <h3>NLP Projects</h3>
-            </div>
-             <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Python_Projects'">
-                <img src="https://images.hdqwalls.com/wallpapers/python-logo-4k-i6.jpg" alt="Project 1" />
-                <h3>Python Projects</h3>
-            </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/Java_Projects'">
-                <img src="https://tse3.mm.bing.net/th/id/OIP.HqeRiEHZbGqApn1zThz5HwHaE8?cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Project 2" />
-                <h3>Java Projects</h3>
-            </div>
-            <div class="project-card" onclick="location.href='https://github.com/sudheer1863/C-CPP_Projects'">
-                <img src="1.png" alt="Project 3" />
-                <h3>C/C++ Projects</h3>
-            </div>
-            <!-- Add more project cards as needed -->
         </div>
     </main>
+
+    <script>
+
+        const username = "VenkataSudheer1863";
+        const projectContainer = document.getElementById("project-cards");
+
+        function getProjectImage(repoName) {
+
+            const name = repoName.toLowerCase();
+
+            if (
+                name.includes("ai") ||
+                name.includes("gen") ||
+                name.includes("llm") ||
+                name.includes("agent")
+            )
+                return "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200";
+
+            if (name.includes("web"))
+                return "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200";
+
+            if (name.includes("data"))
+                return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200";
+
+            if (name.includes("machine"))
+                return "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200";
+
+            if (name.includes("deep"))
+                return "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200";
+
+            if (name.includes("nlp"))
+                return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200";
+
+            if (name.includes("python"))
+                return "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=1200";
+
+            if (name.includes("java"))
+                return "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200";
+
+            return `https://opengraph.githubassets.com/1/${username}/${repoName}`;
+        }
+
+        async function fetchAllRepos(username) {
+
+            let page = 1;
+            let allRepos = [];
+
+            while (true) {
+
+                const response = await fetch(
+                    `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=updated`
+                );
+
+                const repos = await response.json();
+
+                if (!repos.length) break;
+
+                allRepos = [...allRepos, ...repos];
+                page++;
+            }
+
+            return allRepos;
+        }
+
+        async function loadProjects() {
+
+            try {
+
+                const repos = await fetchAllRepos(username);
+
+                projectContainer.innerHTML = "";
+
+                const filteredRepos = repos
+                    .filter(repo => !repo.fork)
+                    .sort((a, b) =>
+                        new Date(b.updated_at) -
+                        new Date(a.updated_at)
+                    );
+
+                if (filteredRepos.length === 0) {
+
+                    projectContainer.innerHTML =
+                        "<div class='loading'>No repositories found.</div>";
+
+                    return;
+                }
+
+                filteredRepos.forEach(repo => {
+
+                    const card = document.createElement("div");
+                    card.className = "project-card";
+
+                    card.innerHTML = `
+                        <img
+                            src="${getProjectImage(repo.name)}"
+                            alt="${repo.name}"
+                            loading="lazy"
+                            onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';"
+                        >
+
+                        <h3>
+                            ${repo.name.replace(/[-_]/g, " ")}
+                        </h3>
+
+                        <p>
+                            ${repo.description || "No description available"}
+                        </p>
+
+                        <div class="project-meta">
+                            ⭐ ${repo.stargazers_count}
+                            &nbsp;|&nbsp;
+                            🍴 ${repo.forks_count}
+                            &nbsp;|&nbsp;
+                            ${repo.language || "N/A"}
+                        </div>
+                    `;
+
+                    card.addEventListener("click", () => {
+                        window.open(repo.html_url, "_blank");
+                    });
+
+                    projectContainer.appendChild(card);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                projectContainer.innerHTML = `
+                    <div class="loading">
+                        Failed to load GitHub repositories.
+                    </div>
+                `;
+            }
+        }
+
+        loadProjects();
+
+    </script>
+
 </body>
 </html>
