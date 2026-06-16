@@ -10,81 +10,58 @@
 
     <style>
 
-        .blog-container {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+    .loading {
+        text-align: center;
+        padding: 40px;
+        font-size: 1.2rem;
+    }
 
-        .blog-container h1 {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-        }
+    .blog-card {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
 
-        .blog-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-        }
+    .blog-card:hover {
+        transform: translateY(-6px);
+    }
 
-        .blog-card {
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #0b0b0b;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .blog-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
 
-        .blog-card:hover {
-            transform: translateY(-8px);
-        }
+    .blog-card h3 {
+        text-align: center;
+        padding: 10px;
+    }
 
-        .blog-card img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            display: block;
-        }
+    .blog-meta {
+        text-align: center;
+        color: #888;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
 
-        .blog-content {
-            padding: 20px;
-        }
+    .linkedin-btn {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px auto;
+        padding: 10px 18px;
+        background: #0A66C2;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: background 0.3s ease;
+    }
 
-        .blog-content h3 {
-            text-align: center;
-            margin: 0;
-            color: white;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
+    .linkedin-btn:hover {
+        background: #084d92;
+    }
 
-        .blog-button {
-            display: block;
-            text-align: center;
-            margin-top: 18px;
-            padding: 12px;
-            background: #0A66C2;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.25s ease;
-        }
-
-        .blog-button:hover {
-            background: #084d92;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-    </style>
+</style>
 
 </head>
 
