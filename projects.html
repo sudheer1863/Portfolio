@@ -102,11 +102,23 @@
     </div>
 
 </main>
-
 <script>
 
 const username = "VenkataSudheer1863";
 const projectContainer = document.getElementById("project-cards");
+
+/*
+    Featured repository names.
+    Add/remove repos here.
+*/
+const FEATURED_REPOS = [
+
+    "repo-name-1",
+    "repo-name-2",
+    "repo-name-3",
+    "repo-name-4"
+
+];
 
 async function fetchAllRepos() {
 
@@ -118,6 +130,10 @@ async function fetchAllRepos() {
         const response = await fetch(
             `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=updated`
         );
+
+        if (!response.ok) {
+            throw new Error("GitHub API Error");
+        }
 
         const repos = await response.json();
 
@@ -132,18 +148,54 @@ async function fetchAllRepos() {
     return allRepos;
 }
 
-async function fetchRepoDetails(repoName) {
+function createProjectCard(repo) {
 
-    const response = await fetch(
-        `https://api.github.com/repos/${username}/${repoName}`,
-        {
-            headers: {
-                "Accept": "application/vnd.github+json"
-            }
-        }
-    );
+    const card = document.createElement("div");
 
-    return await response.json();
+    card.className = "project-card";
+
+    const imageUrl =
+        repo.homepage && (
+            repo.homepage.endsWith(".png") ||
+            repo.homepage.endsWith(".jpg") ||
+            repo.homepage.endsWith(".jpeg") ||
+            repo.homepage.endsWith(".webp")
+        )
+            ? repo.homepage
+            : `https://opengraph.githubassets.com/1/${username}/${repo.name}`;
+
+    card.innerHTML = `
+
+        <img
+            src="${imageUrl}"
+            alt="${repo.name}"
+            loading="lazy"
+            onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';"
+        >
+
+        <h3>
+            ${repo.name.replace(/[-_]/g, " ")}
+        </h3>
+
+        <p>
+            ${repo.description || "No description available"}
+        </p>
+
+        <div class="project-meta">
+            ⭐ ${repo.stargazers_count}
+            |
+            🍴 ${repo.forks_count}
+            |
+            ${repo.language || "N/A"}
+        </div>
+
+    `;
+
+    card.addEventListener("click", () => {
+        window.open(repo.html_url, "_blank");
+    });
+
+    return card;
 }
 
 async function loadProjects() {
@@ -158,21 +210,37 @@ async function loadProjects() {
 
         const repos = await fetchAllRepos();
 
-        const detailedRepos = await Promise.all(
-            repos.map(repo => fetchRepoDetails(repo.name))
-        );
+        let featuredRepos = [];
 
-        const featuredRepos = detailedRepos
-            .filter(repo =>
-                !repo.fork &&
-                repo.topics &&
-                repo.topics.includes("featured")
-            )
-            .sort(
-                (a, b) =>
-                    new Date(b.updated_at) -
-                    new Date(a.updated_at)
+        /*
+            Method 1:
+            Match repo names from FEATURED_REPOS list
+        */
+
+        if (FEATURED_REPOS.length > 0) {
+
+            featuredRepos = repos.filter(repo =>
+                FEATURED_REPOS.includes(repo.name)
             );
+        }
+
+        /*
+            Method 2:
+            If no featured repos specified,
+            automatically show latest non-fork repos.
+        */
+
+        if (featuredRepos.length === 0) {
+
+            featuredRepos = repos
+                .filter(repo => !repo.fork)
+                .sort(
+                    (a, b) =>
+                        new Date(b.updated_at) -
+                        new Date(a.updated_at)
+                )
+                .slice(0, 12);
+        }
 
         projectContainer.innerHTML = "";
 
@@ -180,9 +248,7 @@ async function loadProjects() {
 
             projectContainer.innerHTML = `
                 <div class="loading">
-                    No Featured Projects Found
-                    <br><br>
-                    Add the topic <b>featured</b> to your repositories.
+                    No Projects Found
                 </div>
             `;
 
@@ -190,42 +256,9 @@ async function loadProjects() {
         }
 
         featuredRepos.forEach(repo => {
-
-            const card = document.createElement("div");
-
-            card.className = "project-card";
-
-            card.innerHTML = `
-
-                <img
-                    src="https://opengraph.githubassets.com/1/${username}/${repo.name}"
-                    alt="${repo.name}"
-                    loading="lazy"
-                    onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';"
-                >
-
-                <h3>${repo.name.replace(/[-_]/g, " ")}</h3>
-
-                <p>
-                    ${repo.description || "No description available"}
-                </p>
-
-                <div class="project-meta">
-                    ⭐ ${repo.stargazers_count}
-                    |
-                    🍴 ${repo.forks_count}
-                    |
-                    ${repo.language || "N/A"}
-                </div>
-
-            `;
-
-            card.onclick = () => {
-                window.open(repo.html_url, "_blank");
-            };
-
-            projectContainer.appendChild(card);
-
+            projectContainer.appendChild(
+                createProjectCard(repo)
+            );
         });
 
     }
@@ -235,7 +268,9 @@ async function loadProjects() {
 
         projectContainer.innerHTML = `
             <div class="loading">
-                Failed to load repositories.
+                Unable to load GitHub projects.
+                <br><br>
+                Please try again later.
             </div>
         `;
     }
@@ -244,8 +279,6 @@ async function loadProjects() {
 loadProjects();
 
 </script>
-
-
 
 
 </body>
